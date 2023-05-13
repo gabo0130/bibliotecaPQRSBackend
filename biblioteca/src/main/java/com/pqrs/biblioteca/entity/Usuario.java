@@ -20,4 +20,7 @@ public class Usuario extends Persona {
     @JoinColumn(name = "rol_id")
     private Rol rol;
     
+    @OneToMany(mappedBy = "usuarioAprobador", cascade = CascadeType.ALL)
+    private java.util.List<Respuesta> usuarioAprobador;
+    
 }

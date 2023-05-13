@@ -19,9 +19,6 @@ public class Persona {
     @Column(name = "nombre")
     private String nombre;
     
-    @Column(name = "genero")
-    private char genero;
-    
     @Column(name = "edad")
     private long edad;
     
@@ -36,5 +33,8 @@ public class Persona {
 
     @Column(name = "correo")
     private String correo;
-    
+
+    @OneToMany(mappedBy = "personaSolicitante", cascade = CascadeType.ALL)
+    private java.util.List<Solicitud> personaSolicitante;
+
 }
