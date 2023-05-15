@@ -15,7 +15,7 @@ import lombok.*;
 public class Solicitud {
     
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
     
         @Column(name = "descripcion")
@@ -43,8 +43,11 @@ public class Solicitud {
         @ManyToOne
         @JoinColumn(name = "persona_solicitante_id")
         private Persona personaSolicitante;
-
+        
+        @ManyToOne
+        @JoinColumn(name = "usuario_aprobador_id")
+        private Usuario usuarioAprobador;
+        
         @OneToOne(mappedBy = "solicitud", cascade = CascadeType.ALL)
         private Respuesta respuesta;
-    
 }

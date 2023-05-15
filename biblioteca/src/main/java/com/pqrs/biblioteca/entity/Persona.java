@@ -1,5 +1,7 @@
 package com.pqrs.biblioteca.entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 import lombok.*;
 
@@ -35,6 +37,6 @@ public class Persona {
     private String correo;
 
     @OneToMany(mappedBy = "personaSolicitante", cascade = CascadeType.ALL)
-    private java.util.List<Solicitud> personaSolicitante;
+    private List<Solicitud> personaSolicitante;
 
 }

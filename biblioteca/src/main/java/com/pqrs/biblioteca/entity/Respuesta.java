@@ -25,8 +25,4 @@ public class Respuesta {
         @JoinColumn(name = "solicitud_id")
         private Solicitud solicitud;
         
-        @ManyToOne
-        @JoinColumn(name = "usuario_aprobador_id")
-        private Usuario usuarioAprobador;
-
 }
