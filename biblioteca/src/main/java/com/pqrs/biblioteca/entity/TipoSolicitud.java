@@ -4,6 +4,9 @@ package com.pqrs.biblioteca.entity;
 import java.util.List;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Getter
@@ -24,6 +27,7 @@ public class TipoSolicitud {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tipoSolicitud", cascade = CascadeType.ALL)
     private List<Solicitud> Solicitudes;
 

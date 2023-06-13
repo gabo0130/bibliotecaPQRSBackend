@@ -20,7 +20,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @RestController
-@RequestMapping("/solitudes")
+@RequestMapping("/solicitudes")
 public class SolicitudController {
 
     @Autowired
@@ -37,6 +37,11 @@ public class SolicitudController {
     @GetMapping("/{id}")
     public Solicitud obtenerSolicitudPorId(@PathVariable long id) throws Exception {
         return solicitudService.obtenerSolicitudPorId(id);
+    }
+
+    @GetMapping("/usuario/{id}")
+    public  List<Solicitud>  obtenerSolicitudPorIdUsuario(@PathVariable long id) throws Exception {
+        return solicitudService.obtenerSolicitudPorIdUsuario(id);
     }
     @PostMapping("/")
     public ResponseEntity<?> crearSolicitud(@RequestBody Solicitud solicitud)
@@ -63,7 +68,7 @@ public class SolicitudController {
     @PatchMapping("/{id}")
     public ResponseEntity<?> actualizarSolicitud(@PathVariable long id, @RequestBody Solicitud solicitud)
             throws Exception {
-        Solicitud solicitudActualizada = solicitudService.actualizarSolicitud(id, solicitud,"descripcion");
+        Solicitud solicitudActualizada = solicitudService.actualizarSolicitud(id, solicitud);
         return new ResponseEntity<>(solicitudActualizada, HttpStatus.OK);
     }
 
@@ -80,7 +85,7 @@ public class SolicitudController {
             }
         }
         solicitud.setRutaArchivos(rutaCarpeta);
-        solicitudService.actualizarSolicitud(idSolicitud,solicitud,"ruta");
+        solicitudService.actualizarSolicitud(idSolicitud,solicitud);
         for (MultipartFile archivo : archivos) {
             String nombreArchivo = archivo.getOriginalFilename();
             if (!archivo.isEmpty()){

@@ -3,6 +3,9 @@ package com.pqrs.biblioteca.entity;
 import java.util.List;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 @Getter
@@ -36,6 +39,7 @@ public class Persona {
     @Column(name = "correo")
     private String correo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "personaSolicitante", cascade = CascadeType.ALL)
     private List<Solicitud> personaSolicitante;
 

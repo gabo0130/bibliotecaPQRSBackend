@@ -27,6 +27,9 @@ public class SolicitudService {
         return solicitudRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Solicitud no encontrada"));
     }
+     public List<Solicitud> obtenerSolicitudPorIdUsuario(long idUsuario) {
+        return solicitudRepository.obtenerSolicitudPorIdUsuario(idUsuario);
+    }
 
     public Solicitud crearSolicitud(Solicitud Solicitud) throws Exception {
         try {
@@ -36,28 +39,13 @@ public class SolicitudService {
         }
     }
 
-    public Solicitud actualizarSolicitud(long id, Solicitud solicitudActualizada, String parametroAct) throws Exception {
+    public Solicitud actualizarSolicitud(long id, Solicitud solicitudActualizada) throws Exception {
         try {
             Solicitud solicitudEncontrada = solicitudRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Solicitud no encontrada"));
-            
-            switch (parametroAct) {
-                case "estado":
-                    solicitudEncontrada.setEstado(solicitudActualizada.getEstado());
-                    break;
-                case "ruta":
-                    solicitudEncontrada.setRutaArchivos(solicitudActualizada.getRutaArchivos());
-                    break;
-                case "usuarioAprobador":
-                    solicitudEncontrada.setUsuarioAprobador(solicitudActualizada.getUsuarioAprobador());
-                    break;
-                case "descripcion":
-                    solicitudEncontrada.setDescripcion(solicitudActualizada.getDescripcion());
-                    break;
-                default:
-                    throw new IllegalArgumentException("El parámetro especificado no es válido");
+            if(solicitudEncontrada==null){
+                throw new Exception("Solicitud no encontrada");
             }
-            
-            Solicitud solicitudGuardada = solicitudRepository.save(solicitudEncontrada);
+            Solicitud solicitudGuardada = solicitudRepository.save(solicitudActualizada);
             return solicitudGuardada;
         } catch(NoSuchElementException ex) {
             throw new NoSuchElementException("La solicitud especificada no fue encontrada");
